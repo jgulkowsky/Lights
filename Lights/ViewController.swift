@@ -26,12 +26,14 @@ class ViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        setupInitialColor()
+        bindToVMScreenColor()
         addTapGestureRecognizer()
     }
     
-    private func setupInitialColor() {
-        view.backgroundColor = .systemPurple
+    private func bindToVMScreenColor() {
+        vm.screenColor.asObservable().subscribe { [weak self] color in
+            self?.view.backgroundColor = color
+        }.disposed(by: disposeBag)
     }
     
     private func addTapGestureRecognizer() {
