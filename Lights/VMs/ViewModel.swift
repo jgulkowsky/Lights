@@ -20,9 +20,14 @@ class ViewModel {
         screenColor.accept(UIColor.random)
     }
     
-    //todo: some ideas
-    //todo: add play / pause button (only one and it has two modes) on the bottom of the screen
-    //todo: in play mode colors will change automatically with some animation
-    //todo: in pause mode color will stay until user taps on screen (or it can ficker a little bit but in the same color)
-    //todo: in play mode when user taps on screen he will be shown ui elements like pause button and speedometer (on the right) where he can set up speed of the animation
+    //todo: same ideas (almost) but more precise:
+    //todo: tapping on PLAY button switches mode to playing
+    //todo: tapping on PAUSE button switches mode to paused
+    //todo: when in paused mode the color is constant until user changes it manualy
+    //todo: when in plauing mode the color changes with transition
+    //todo: in playing mode user can change speed of changes with speedometer on the right hand side
+    //todo: normally ui is invisible to activate it user needs to tap (it doesn't change color in such situation)
+    //todo: in playing mode user will see PAUSE button to switch mode and speedometer
+    //todo: in paused mode user will see only PLAY button to switch mode
+    //todo: when ui is visible and user taps on screen the color is changed to some other random one (it's true for both modes)
 }
