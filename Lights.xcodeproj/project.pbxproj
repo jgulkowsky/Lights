@@ -3,18 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C056EC4B29FA80192C88265 /* Pods_Lights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */; };
 		E33F5BFC263221890000925C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5BFB263221890000925C /* AppDelegate.swift */; };
 		E33F5BFE263221890000925C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5BFD263221890000925C /* SceneDelegate.swift */; };
 		E33F5C00263221890000925C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5BFF263221890000925C /* ViewController.swift */; };
 		E33F5C052632218B0000925C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E33F5C042632218B0000925C /* Assets.xcassets */; };
 		E33F5C082632218B0000925C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33F5C062632218B0000925C /* LaunchScreen.storyboard */; };
+		E33F5C26263229970000925C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C25263229970000925C /* ViewModel.swift */; };
+		E33F5C2926322DDC0000925C /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C2826322DDC0000925C /* UIColorExtensions.swift */; };
+		E33F5C33263230F30000925C /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C32263230F30000925C /* DI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28EB39A28375D2CDF2C01072 /* Pods-Lights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lights.release.xcconfig"; path = "Target Support Files/Pods-Lights/Pods-Lights.release.xcconfig"; sourceTree = "<group>"; };
+		B011BBF266A10CFA001D3162 /* Pods-Lights.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lights.debug.xcconfig"; path = "Target Support Files/Pods-Lights/Pods-Lights.debug.xcconfig"; sourceTree = "<group>"; };
 		E33F5BF8263221890000925C /* Lights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lights.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E33F5BFB263221890000925C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E33F5BFD263221890000925C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +28,10 @@
 		E33F5C042632218B0000925C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E33F5C072632218B0000925C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E33F5C092632218B0000925C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E33F5C25263229970000925C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		E33F5C2826322DDC0000925C /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		E33F5C32263230F30000925C /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
+		F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C056EC4B29FA80192C88265 /* Pods_Lights.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		345361EA6040F7C2EEF7403C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C2FA6F77C26E6E43ABB2F577 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B011BBF266A10CFA001D3162 /* Pods-Lights.debug.xcconfig */,
+				28EB39A28375D2CDF2C01072 /* Pods-Lights.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E33F5BEF263221890000925C = {
 			isa = PBXGroup;
 			children = (
 				E33F5BFA263221890000925C /* Lights */,
 				E33F5BF9263221890000925C /* Products */,
+				C2FA6F77C26E6E43ABB2F577 /* Pods */,
+				345361EA6040F7C2EEF7403C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +84,41 @@
 		E33F5BFA263221890000925C /* Lights */ = {
 			isa = PBXGroup;
 			children = (
+				E33F5C37263231FA0000925C /* Extensions */,
+				E33F5C36263231E90000925C /* VMs */,
+				E33F5C35263231E10000925C /* VCs */,
 				E33F5BFB263221890000925C /* AppDelegate.swift */,
 				E33F5BFD263221890000925C /* SceneDelegate.swift */,
-				E33F5BFF263221890000925C /* ViewController.swift */,
 				E33F5C042632218B0000925C /* Assets.xcassets */,
 				E33F5C062632218B0000925C /* LaunchScreen.storyboard */,
 				E33F5C092632218B0000925C /* Info.plist */,
+				E33F5C32263230F30000925C /* DI.swift */,
 			);
 			path = Lights;
+			sourceTree = "<group>";
+		};
+		E33F5C35263231E10000925C /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5BFF263221890000925C /* ViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		E33F5C36263231E90000925C /* VMs */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5C25263229970000925C /* ViewModel.swift */,
+			);
+			path = VMs;
+			sourceTree = "<group>";
+		};
+		E33F5C37263231FA0000925C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5C2826322DDC0000925C /* UIColorExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E33F5C0C2632218B0000925C /* Build configuration list for PBXNativeTarget "Lights" */;
 			buildPhases = (
+				A16C3976EC6AFF17551D8C9D /* [CP] Check Pods Manifest.lock */,
 				E33F5BF4263221890000925C /* Sources */,
 				E33F5BF5263221890000925C /* Frameworks */,
 				E33F5BF6263221890000925C /* Resources */,
+				A285B61FC3D69416FA828D8F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,6 +187,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A16C3976EC6AFF17551D8C9D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lights-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A285B61FC3D69416FA828D8F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lights/Pods-Lights-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lights/Pods-Lights-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lights/Pods-Lights-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E33F5BF4263221890000925C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -135,7 +236,10 @@
 			files = (
 				E33F5C00263221890000925C /* ViewController.swift in Sources */,
 				E33F5BFC263221890000925C /* AppDelegate.swift in Sources */,
+				E33F5C33263230F30000925C /* DI.swift in Sources */,
+				E33F5C26263229970000925C /* ViewModel.swift in Sources */,
 				E33F5BFE263221890000925C /* SceneDelegate.swift in Sources */,
+				E33F5C2926322DDC0000925C /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +375,7 @@
 		};
 		E33F5C0D2632218B0000925C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B011BBF266A10CFA001D3162 /* Pods-Lights.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -289,6 +394,7 @@
 		};
 		E33F5C0E2632218B0000925C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28EB39A28375D2CDF2C01072 /* Pods-Lights.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
