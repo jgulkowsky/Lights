@@ -6,12 +6,29 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private let disposeBag = DisposeBag()
+    
+    override func loadView() {
+        super.loadView()
+        setupInitialColor()
+        addTapGestureRecognizer()
+    }
+    
+    private func setupInitialColor() {
         view.backgroundColor = .systemPurple
     }
-}
+    
+    private func addTapGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer()
+        view.addGestureRecognizer(tapGesture)
 
+        tapGesture.rx.event.bind(onNext: { recognizer in
+            print("tap")
+        }).disposed(by: disposeBag)
+    }
+}
