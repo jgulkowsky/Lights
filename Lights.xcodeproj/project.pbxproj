@@ -16,6 +16,7 @@
 		E33F5C26263229970000925C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C25263229970000925C /* ViewModel.swift */; };
 		E33F5C2926322DDC0000925C /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C2826322DDC0000925C /* UIColorExtensions.swift */; };
 		E33F5C33263230F30000925C /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C32263230F30000925C /* DI.swift */; };
+		E33F5C41263239850000925C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C40263239850000925C /* Mode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		E33F5C25263229970000925C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		E33F5C2826322DDC0000925C /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		E33F5C32263230F30000925C /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
+		E33F5C40263239850000925C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 		E33F5BFA263221890000925C /* Lights */ = {
 			isa = PBXGroup;
 			children = (
+				E33F5C3F263239720000925C /* Enums */,
 				E33F5C37263231FA0000925C /* Extensions */,
 				E33F5C36263231E90000925C /* VMs */,
 				E33F5C35263231E10000925C /* VCs */,
@@ -119,6 +122,14 @@
 				E33F5C2826322DDC0000925C /* UIColorExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E33F5C3F263239720000925C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5C40263239850000925C /* Mode.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +251,7 @@
 				E33F5C26263229970000925C /* ViewModel.swift in Sources */,
 				E33F5BFE263221890000925C /* SceneDelegate.swift in Sources */,
 				E33F5C2926322DDC0000925C /* UIColorExtensions.swift in Sources */,
+				E33F5C41263239850000925C /* Mode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

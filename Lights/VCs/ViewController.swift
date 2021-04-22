@@ -8,12 +8,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
 class ViewController: UIViewController {
 
     private var vm: ViewModel!
     
     private let disposeBag = DisposeBag()
+    private let playPauseButton = UIButton()
     
     init(_ vm: ViewModel) {
         self.vm = vm
@@ -26,8 +28,25 @@ class ViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        setupPlayPauseButton()
         bindToVMScreenColor()
+        //todo: bindToVMMode() <- setup button icon
         addTapGestureRecognizer()
+    }
+    
+    private func setupPlayPauseButton() {
+        view.addSubview(playPauseButton)
+        playPauseButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(40)
+            make.height.equalTo(40)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(100) //todo: use constants
+        }
+        playPauseButton.backgroundColor = .black //todo: in future make it lighter than background
+        
+        playPauseButton.rx.tap.bind { [weak self] _ in
+            self?.vm.onPlayPauseButtonTap()
+        }.disposed(by: disposeBag)
     }
     
     private func bindToVMScreenColor() {

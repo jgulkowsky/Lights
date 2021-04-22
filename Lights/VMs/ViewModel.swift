@@ -11,13 +11,34 @@ import RxCocoa
 class ViewModel {
     
     var screenColor = BehaviorRelay<UIColor>(value: UIColor.random)
+    var mode = BehaviorRelay<Mode>(value: .paused)
     
     func onScreenTap() {
         chooseNewScreenColor()
     }
     
+    func onPlayPauseButtonTap() {
+        if mode.value == .paused {
+            switchToPlayingMode()
+        } else {
+            switchToPausedMode()
+        }
+    }
+    
     private func chooseNewScreenColor() {
         screenColor.accept(UIColor.random)
+    }
+    
+    private func switchToPlayingMode() {
+        print("switchToPlayingMode")
+        mode.accept(.playing)
+        //todo: start color transition
+    }
+    
+    private func switchToPausedMode() {
+        print("switchToPausedMode")
+        mode.accept(.paused)
+        //todo: stop color transition
     }
     
     //todo: same ideas (almost) but more precise:
