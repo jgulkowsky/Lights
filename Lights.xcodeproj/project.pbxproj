@@ -15,6 +15,7 @@
 		E33F5C082632218B0000925C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33F5C062632218B0000925C /* LaunchScreen.storyboard */; };
 		E33F5C26263229970000925C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C25263229970000925C /* ViewModel.swift */; };
 		E33F5C2926322DDC0000925C /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C2826322DDC0000925C /* UIColorExtensions.swift */; };
+		E33F5C33263230F30000925C /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C32263230F30000925C /* DI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		E33F5C092632218B0000925C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E33F5C25263229970000925C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		E33F5C2826322DDC0000925C /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		E33F5C32263230F30000925C /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
 		F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 				E33F5C092632218B0000925C /* Info.plist */,
 				E33F5C25263229970000925C /* ViewModel.swift */,
 				E33F5C2826322DDC0000925C /* UIColorExtensions.swift */,
+				E33F5C32263230F30000925C /* DI.swift */,
 			);
 			path = Lights;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			files = (
 				E33F5C00263221890000925C /* ViewController.swift in Sources */,
 				E33F5BFC263221890000925C /* AppDelegate.swift in Sources */,
+				E33F5C33263230F30000925C /* DI.swift in Sources */,
 				E33F5C26263229970000925C /* ViewModel.swift in Sources */,
 				E33F5BFE263221890000925C /* SceneDelegate.swift in Sources */,
 				E33F5C2926322DDC0000925C /* UIColorExtensions.swift in Sources */,
