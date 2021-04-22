@@ -84,17 +84,41 @@
 		E33F5BFA263221890000925C /* Lights */ = {
 			isa = PBXGroup;
 			children = (
+				E33F5C37263231FA0000925C /* Extensions */,
+				E33F5C36263231E90000925C /* VMs */,
+				E33F5C35263231E10000925C /* VCs */,
 				E33F5BFB263221890000925C /* AppDelegate.swift */,
 				E33F5BFD263221890000925C /* SceneDelegate.swift */,
-				E33F5BFF263221890000925C /* ViewController.swift */,
 				E33F5C042632218B0000925C /* Assets.xcassets */,
 				E33F5C062632218B0000925C /* LaunchScreen.storyboard */,
 				E33F5C092632218B0000925C /* Info.plist */,
-				E33F5C25263229970000925C /* ViewModel.swift */,
-				E33F5C2826322DDC0000925C /* UIColorExtensions.swift */,
 				E33F5C32263230F30000925C /* DI.swift */,
 			);
 			path = Lights;
+			sourceTree = "<group>";
+		};
+		E33F5C35263231E10000925C /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5BFF263221890000925C /* ViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		E33F5C36263231E90000925C /* VMs */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5C25263229970000925C /* ViewModel.swift */,
+			);
+			path = VMs;
+			sourceTree = "<group>";
+		};
+		E33F5C37263231FA0000925C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E33F5C2826322DDC0000925C /* UIColorExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
