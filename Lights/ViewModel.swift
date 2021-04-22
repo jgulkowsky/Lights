@@ -10,14 +10,13 @@ import RxCocoa
 
 class ViewModel {
     
-    var screenColor = BehaviorRelay<UIColor>(value: .systemPurple)
+    var screenColor = BehaviorRelay<UIColor>(value: UIColor.random)
     
     func onScreenTap() {
-        print("onScreenTap")
         chooseNewScreenColor()
     }
     
     private func chooseNewScreenColor() {
-        screenColor.accept(.systemPink)
+        screenColor.accept(UIColor.random)
     }
 }
