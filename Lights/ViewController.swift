@@ -11,7 +11,18 @@ import RxCocoa
 
 class ViewController: UIViewController {
 
+    private var vm: ViewModel!
+    
     private let disposeBag = DisposeBag()
+    
+    init(_ vm: ViewModel) {
+        self.vm = vm
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -27,8 +38,8 @@ class ViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer()
         view.addGestureRecognizer(tapGesture)
 
-        tapGesture.rx.event.bind(onNext: { recognizer in
-            print("tap")
+        tapGesture.rx.event.bind(onNext: { [weak self] _ in
+            self?.vm.onScreenTap()
         }).disposed(by: disposeBag)
     }
 }
