@@ -37,10 +37,10 @@ class ViewController: UIViewController {
     private func setupPlayPauseButton() {
         view.addSubview(playPauseButton)
         playPauseButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(40)
-            make.height.equalTo(40)
+            make.bottom.equalToSuperview().inset(SizesAndOffsets.ViewController.PlayPauseButton.BottomInset)
+            make.height.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.Height)
             make.centerX.equalToSuperview()
-            make.width.equalTo(100) //todo: use constants
+            make.width.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.Width)
         }
         
         playPauseButton.rx.tap.bind { [weak self] _ in
