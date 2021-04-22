@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         super.loadView()
         setupPlayPauseButton()
         bindToVMScreenColor()
-        //todo: bindToVMMode() <- setup button icon
+        bindToVMMode()
         addTapGestureRecognizer()
     }
     
@@ -42,7 +42,6 @@ class ViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.equalTo(100) //todo: use constants
         }
-        playPauseButton.backgroundColor = .black //todo: in future make it lighter than background
         
         playPauseButton.rx.tap.bind { [weak self] _ in
             self?.vm.onPlayPauseButtonTap()
@@ -52,6 +51,14 @@ class ViewController: UIViewController {
     private func bindToVMScreenColor() {
         vm.screenColor.asObservable().subscribe { [weak self] color in
             self?.view.backgroundColor = color
+        }.disposed(by: disposeBag)
+    }
+    
+    private func bindToVMMode() {
+        vm.mode.asObservable().subscribe { [weak self] mode in
+            self?.playPauseButton.setTitle(mode == .paused ? "Play" : "Pause", for: .normal)
+            //todo: in future make it lighter than background
+            //todo: in future use icons instead of titles
         }.disposed(by: disposeBag)
     }
     

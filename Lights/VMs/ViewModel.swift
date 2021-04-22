@@ -23,6 +23,7 @@ class ViewModel {
         } else {
             switchToPausedMode()
         }
+        clearUI(afterSeconds: 2)
     }
     
     private func chooseNewScreenColor() {
@@ -39,6 +40,11 @@ class ViewModel {
         print("switchToPausedMode")
         mode.accept(.paused)
         //todo: stop color transition
+    }
+    
+    private func clearUI(afterSeconds seconds: Int) {
+        //todo: ui visible
+        //todo: after time ui invisible -> we need to store this state too
     }
     
     //todo: same ideas (almost) but more precise:
