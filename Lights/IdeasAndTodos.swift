@@ -23,3 +23,10 @@ import Foundation
 //todo: maybe on every color there should be a lofi track to play
 //todo: so when user taps on color change he also changes the music?? (it's far far in future but maybe...)
 //todo: and also we could then combine it with pomodoro - so music plays during work and stops on brakes..
+
+//todo: or as the name suggests... maybe you should combine this app with rgb lamps to be able to set up your room with different setups
+//todo: like partymode :)
+//todo: focus
+//todo: evening tea and book
+//todo: christmas
+//todo: gaming
