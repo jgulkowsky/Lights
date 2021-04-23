@@ -19,3 +19,7 @@ import Foundation
 //todo: when ui is visible and user taps on screen the color is changed to some other random one (it's true for both modes)
 
 //todo: maybe add chameleon mode -> so you can open invisible camera and telephone will change color to what's behind it?? (if possible to open camera in quiet mode)
+
+//todo: maybe on every color there should be a lofi track to play
+//todo: so when user taps on color change he also changes the music?? (it's far far in future but maybe...)
+//todo: and also we could then combine it with pomodoro - so music plays during work and stops on brakes..
