@@ -30,17 +30,17 @@ class ViewController: UIViewController {
         super.loadView()
         setupPlayPauseButton()
         bindToVMScreenColor()
-        bindToVMMode()
+        bindToVMPlayPauseButtonIcon()
         addTapGestureRecognizer()
     }
     
     private func setupPlayPauseButton() {
         view.addSubview(playPauseButton)
         playPauseButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(SizesAndOffsets.ViewController.PlayPauseButton.BottomInset)
-            make.height.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.Height)
+            make.bottom.equalToSuperview().inset(SizesAndOffsets.ViewController.PlayPauseButton.bottomInset)
+            make.height.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.height)
             make.centerX.equalToSuperview()
-            make.width.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.Width)
+            make.width.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.width)
         }
         
         playPauseButton.rx.tap.bind { [weak self] _ in
@@ -54,11 +54,19 @@ class ViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    private func bindToVMMode() {
-        vm.mode.asObservable().subscribe { [weak self] mode in
-            self?.playPauseButton.setTitle(mode == .paused ? "Play" : "Pause", for: .normal)
-            //todo: in future make it lighter than background
-            //todo: in future use icons instead of titles
+    private func bindToVMPlayPauseButtonIcon() {
+        vm.playPauseButtonIconName.asObservable().subscribe { [weak self] playPauseButtonIconName in
+            if let iconName = playPauseButtonIconName.element,
+               let icon = UIImage(systemName: iconName, withConfiguration: SizesAndOffsets.ViewController.PlayPauseButton.iconSizeConfig) {
+                let tintedIcon = icon.withRenderingMode(.alwaysTemplate)
+                self?.playPauseButton.setImage(tintedIcon, for: .normal)
+                self?.playPauseButton.setImage(tintedIcon, for: .highlighted)
+                self?.playPauseButton.tintColor = .white //todo: in future make it lighter than background
+            } else {
+                //todo: first of all - it will not rather happen ever!
+                //todo: log error
+                fatalError("Icon is nil!") //todo: fatalErrors are not the best way out...
+            }
         }.disposed(by: disposeBag)
     }
     
