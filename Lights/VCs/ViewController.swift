@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let playPauseButton = UIButton()
     
+    private var uiAnimator = UIViewPropertyAnimator()
+    
     init(_ vm: ViewModel) {
         self.vm = vm
         super.init(nibName: nil, bundle: nil)
@@ -72,10 +74,14 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMUIVisibility() {
-        vm.uiVisibility.asObservable().subscribe { [weak self] uiVisibility in
-            self?.playPauseButton.isHidden = uiVisibility == .hidden
+        vm.uiVisibility.asObservable().subscribe(onNext: { [weak self] uiVisibility in
+            if uiVisibility == .hidden {
+                self?.fadeUIOut()
+            } else {
+                self?.fadeUIIn()
+            }
             //todo: when add more ui elements, put them into the container and use this binding to control whole container instead of single elements - such as playPauseButton
-        }.disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     private func addTapGestureRecognizer() {
@@ -86,4 +92,26 @@ class ViewController: UIViewController {
             self?.vm.onScreenTap()
         }).disposed(by: disposeBag)
     }
+    
+    private func fadeUIOut() {
+        uiAnimator.stopAnimation(true)
+        let duration = Double(playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange
+        uiAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [weak self] in
+            self?.playPauseButton.alpha = 0
+        }
+        uiAnimator.startAnimation()
+    }
+    
+    private func fadeUIIn() {
+        uiAnimator.stopAnimation(true)
+        let duration = Double(1.0 - playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange
+        uiAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [weak self] in
+            self?.playPauseButton.alpha = 1
+        }
+        uiAnimator.startAnimation()
+    }
+    
+    //todo: should animations be here? not rather in vm? they are also a part o logic
+    
+    //todo: remember to handle playPauseButton similar like tap anywhere - now it's different in terms of prolonging animations - in fact user can only influence animation when it collapsing
 }
