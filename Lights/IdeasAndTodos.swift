@@ -11,7 +11,7 @@ import Foundation
 //todo: tapping on PLAY button switches mode to playing
 //todo: tapping on PAUSE button switches mode to paused
 //todo: when in paused mode the color is constant until user changes it manualy
-//todo: when in plauing mode the color changes with transition
+//todo: when in plaing mode the color changes with transition
 //todo: in playing mode user can change speed of changes with speedometer on the right hand side
 //todo: normally ui is invisible to activate it user needs to tap (it doesn't change color in such situation)
 //todo: in playing mode user will see PAUSE button to switch mode and speedometer
