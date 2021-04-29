@@ -7,15 +7,28 @@
 
 import UIKit
 import RxCocoa
+import RxSwift
 
 class ViewModel {
     
     var screenColor = BehaviorRelay<UIColor>(value: UIColor.random)
     var mode = BehaviorRelay<Mode>(value: .paused) //todo: do we really need it? in this moment nothing subsribes to it
     var playPauseButtonIconName = BehaviorRelay<String>(value: "play")
+    var uiVisibility = BehaviorRelay<UIVisibility>(value: .hidden)
+    
+    private var hideUITimerDisposeBag = DisposeBag()
+    
+    init() {
+        showUI(forSeconds: 5) //todo: move to time constants
+    }
     
     func onScreenTap() {
-        chooseNewScreenColor()
+        if (uiVisibility.value == .hidden) {
+            showUI(forSeconds: 2) //todo: move to time constants
+        } else {
+            prolongShowingUI(forSeconds: 2) //todo: move to time constants
+            chooseNewScreenColor()
+        }
     }
     
     func onPlayPauseButtonTap() {
@@ -24,7 +37,6 @@ class ViewModel {
         } else {
             switchToPausedMode()
         }
-        clearUI(afterSeconds: 2)
     }
     
     private func chooseNewScreenColor() {
@@ -32,21 +44,42 @@ class ViewModel {
     }
     
     private func switchToPlayingMode() {
-        print("switchToPlayingMode")
+        //print("switchToPlayingMode")
         mode.accept(.playing)
         playPauseButtonIconName.accept("pause")
         //todo: start color transition
     }
     
     private func switchToPausedMode() {
-        print("switchToPausedMode")
+        //print("switchToPausedMode")
         mode.accept(.paused)
         playPauseButtonIconName.accept("play")
         //todo: stop color transition
     }
     
-    private func clearUI(afterSeconds seconds: Int) {
-        //todo: ui visible
-        //todo: after time ui invisible -> we need to store this state too
+    private func showUI(forSeconds seconds: Int) {
+        if uiVisibility.value == .hidden {
+            print("make ui visible")
+            uiVisibility.accept(.visible)
+            resetHideUITimer(forSeconds: seconds)
+        }
+    }
+    
+    private func prolongShowingUI(forSeconds seconds: Int) {
+        if uiVisibility.value == .visible {
+            print("prolong showing ui")
+            resetHideUITimer(forSeconds: seconds)
+        }
+    }
+    
+    private func resetHideUITimer(forSeconds seconds: Int) {
+        hideUITimerDisposeBag = DisposeBag()
+        Observable.just(())
+            .delay(.seconds(seconds), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.uiVisibility.accept(.hidden)
+                print("make ui hidden")
+            })
+            .disposed(by: hideUITimerDisposeBag)
     }
 }

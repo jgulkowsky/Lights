@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         setupPlayPauseButton()
         bindToVMScreenColor()
         bindToVMPlayPauseButtonIcon()
+        bindToVMUIVisibility()
         addTapGestureRecognizer()
     }
     
@@ -67,6 +68,13 @@ class ViewController: UIViewController {
                 //todo: log error
                 fatalError("Icon is nil!") //todo: fatalErrors are not the best way out...
             }
+        }.disposed(by: disposeBag)
+    }
+    
+    private func bindToVMUIVisibility() {
+        vm.uiVisibility.asObservable().subscribe { [weak self] uiVisibility in
+            self?.playPauseButton.isHidden = uiVisibility == .hidden
+            //todo: when add more ui elements, put them into the container and use this binding to control whole container instead of single elements - such as playPauseButton
         }.disposed(by: disposeBag)
     }
     
