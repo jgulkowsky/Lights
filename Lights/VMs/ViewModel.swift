@@ -19,14 +19,14 @@ class ViewModel {
     private var hideUITimerDisposeBag = DisposeBag()
     
     init() {
-        showUI(forSeconds: 5) //todo: move to time constants
+        showUI(forSeconds: Durations.ViewModel.uiVisibilityInitial)
     }
     
     func onScreenTap() {
         if (uiVisibility.value == .hidden) {
-            showUI(forSeconds: 2) //todo: move to time constants
+            showUI(forSeconds: Durations.ViewModel.uiVisibility)
         } else {
-            prolongShowingUI(forSeconds: 2) //todo: move to time constants
+            prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility)
             chooseNewScreenColor()
         }
     }
@@ -82,4 +82,6 @@ class ViewModel {
             })
             .disposed(by: hideUITimerDisposeBag)
     }
+    
+    //todo: prolong viisbility also on playPauseButtonTap - but first do some animations - as it can bahave differently if you did it vice versa
 }
