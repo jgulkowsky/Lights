@@ -145,4 +145,6 @@ class ViewController: UIViewController {
     //todo: yep - I thnik next commit should be about moving as much as possible to viewModel
     
     //todo: and next after this should be about writting some test cases as our app starts to become slowly quite a complicated state machine
+    
+    //todo: IMPORTANT! for sure we have problem when tapping on screen during the color transition - we can start multiple color transitions at once - check in print logs - best would be to block tapping on screen when in color transition - by this I mean tapping on screen will only show up / prolong showing up the ui - nothing more
 }
