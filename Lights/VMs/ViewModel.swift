@@ -37,6 +37,8 @@ class ViewModel {
         }
     }
     
+    //todo: IMPORTANT when playPauseButton is fading out it doesn't react on touches - I wrote about it earlier but didn't notice then that this can be bothering and that it seems as our ui is broken a little bit - I think we sould try to do it in such way that play/pause functionality is available as long as we can see the button (even really really poorly as it's almost zero opacity) - if you do so also check with onScreenTap - as this possibly can cause such situation that when you tap on button you will change mode but in same moment if you tap on screen you will just make button visible again (and not change bg color) - however this is maybe okay? Think about it anyway
+    //todo: IMPORTANT but for sure we need to change this fading out inactivity - this is really annoying especially when button is quite opaque still (let's say it has 90% opacity and seems like normal active button - then it looks as it ust doesn't respond to our action and that ui is broken)
     func onPlayPauseButtonTap() {
         print("onPlayPauseButtonTap")
         playPauseButtonTappedAtLeastOnce = true
