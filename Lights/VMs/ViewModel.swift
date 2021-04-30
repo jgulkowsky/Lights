@@ -62,12 +62,13 @@ class ViewModel {
             //todo: log error
             fatalError("Color is nil!") //todo: fatalErrors are not the best way out...
         }
-        screenColor.accept(color)
+        chooseNewScreenColor(color)
     }
     
-    private func chooseNewScreenColor() {
+    private func chooseNewScreenColor(_ color: UIColor? = nil) {
         print("chooseNewScreenColor")
-        screenColor.accept(UIColor.random)
+        let color = color ?? UIColor.random
+        screenColor.accept(color)
     }
     
     private func switchToPlayingMode() {
