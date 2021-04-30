@@ -92,20 +92,20 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMMode() {
-        //todo: maybe use filter instead of if
-        vm.mode.asObservable().subscribe { [weak self] mode in
-            print("bindToVMMode.subscribe")
-            
-            guard let `self` = self else {
-                //todo: first of all - it will not rather happen ever!
-                //todo: log error
-                fatalError("self is nil!") //todo: fatalErrors are not the best way out...
-            }
-            
-            if mode.element == .paused && self.vm.playPauseButtonTappedAtLeastOnce {
-                self.bgColorAnimator.stopAnimation(true)
-                self.vm.onColorTransitionStopped(at: self.view.backgroundColor)
-            }
+        vm.mode.asObservable()
+            .filter { $0 == .paused }
+            .subscribe { [weak self] mode in
+                guard let `self` = self else {
+                    //todo: first of all - it will not rather happen ever!
+                    //todo: log error
+                    fatalError("self is nil!") //todo: fatalErrors are not the best way out...
+                }
+                
+                if self.vm.playPauseButtonTappedAtLeastOnce {
+                    print("bindToVMMode.subscribe")
+                    self.bgColorAnimator.stopAnimation(true)
+                    self.vm.onColorTransitionStopped(at: self.view.backgroundColor)
+                }
         }.disposed(by: disposeBag)
     }
     

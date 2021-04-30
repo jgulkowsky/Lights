@@ -10,8 +10,9 @@ import RxCocoa
 import RxSwift
 
 class ViewModel {
+    
     var screenColor = BehaviorRelay<UIColor>(value: UIColor.random)
-    var mode = BehaviorRelay<Mode>(value: .paused) //todo: do we really need it? in this moment nothing subsribes to it
+    var mode = BehaviorRelay<Mode>(value: .paused)
     var playPauseButtonIconName = BehaviorRelay<String>(value: TextsAndNames.ViewModel.playButtonIconName)
     var uiVisibility = BehaviorRelay<UIVisibility>(value: .hidden)
     
