@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     private let playPauseButton = UIButton()
     
     private var uiAnimator = UIViewPropertyAnimator()
+    private var bgColorAnimator = UIViewPropertyAnimator()
     
     init(_ vm: ViewModel) {
         self.vm = vm
@@ -34,6 +35,7 @@ class ViewController: UIViewController {
         bindToVMScreenColor()
         bindToVMPlayPauseButtonIcon()
         bindToVMUIVisibility()
+        bindToVMMode()
         addTapGestureRecognizer()
     }
     
@@ -53,7 +55,12 @@ class ViewController: UIViewController {
     
     private func bindToVMScreenColor() {
         vm.screenColor.asObservable().subscribe { [weak self] color in
-            self?.view.backgroundColor = color.element
+            print("bindToVMScreenColor.subscribe")
+            if (self?.vm.mode.value == .paused) {
+                self?.view.backgroundColor = color.element
+            } else {
+                self?.startColorTransition(to: color.element)
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -84,6 +91,17 @@ class ViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
+    private func bindToVMMode() {
+        //todo: maybe use filter instead of if
+        vm.mode.asObservable().subscribe{ [weak self] mode in
+            print("bindToVMMode.subscribe")
+            if mode.element == .paused {
+                self?.bgColorAnimator.stopAnimation(true)
+                self?.vm.onColorTransitionStopped(at: self?.view.backgroundColor)
+            }
+        }.disposed(by: disposeBag)
+    }
+    
     private func addTapGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer()
         view.addGestureRecognizer(tapGesture)
@@ -111,5 +129,20 @@ class ViewController: UIViewController {
         uiAnimator.startAnimation()
     }
     
-    //todo: should animations be here? not rather in vm? they are also a part o logic
+    private func startColorTransition(to color: UIColor?) {
+        print("startColorTransition")
+        bgColorAnimator = UIViewPropertyAnimator(duration: Durations.ViewModel.colorTransition, curve: .linear) { [weak self] in
+            self?.view.backgroundColor = color
+        }
+        bgColorAnimator.addCompletion { [weak self] _ in
+            self?.vm.onColorTransitionComplete()
+        }
+        bgColorAnimator.startAnimation()
+    }
+    
+    //todo: should animations be here? not rather in vm? they are also a part o logic - this applies to both fading out / in of the button and starting / stopping color transition of the view
+    
+    //todo: yep - I thnik next commit should be about moving as much as possible to viewModel
+    
+    //todo: and next after this should be about writting some test cases as our app starts to become slowly quite a complicated state machine
 }
