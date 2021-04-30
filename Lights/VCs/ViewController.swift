@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMUIVisibility() {
-        vm.uiVisibility.asObservable().subscribe{ [weak self] uiVisibility in
+        vm.uiVisibility.asObservable().subscribe { [weak self] uiVisibility in
             if uiVisibility.element == .hidden {
                 self?.fadeUIOut()
             } else {
@@ -93,11 +93,18 @@ class ViewController: UIViewController {
     
     private func bindToVMMode() {
         //todo: maybe use filter instead of if
-        vm.mode.asObservable().subscribe{ [weak self] mode in
+        vm.mode.asObservable().subscribe { [weak self] mode in
             print("bindToVMMode.subscribe")
-            if mode.element == .paused {
-                self?.bgColorAnimator.stopAnimation(true)
-                self?.vm.onColorTransitionStopped(at: self?.view.backgroundColor)
+            
+            guard let `self` = self else {
+                //todo: first of all - it will not rather happen ever!
+                //todo: log error
+                fatalError("self is nil!") //todo: fatalErrors are not the best way out...
+            }
+            
+            if mode.element == .paused && self.vm.playPauseButtonTappedAtLeastOnce {
+                self.bgColorAnimator.stopAnimation(true)
+                self.vm.onColorTransitionStopped(at: self.view.backgroundColor)
             }
         }.disposed(by: disposeBag)
     }
@@ -145,6 +152,4 @@ class ViewController: UIViewController {
     //todo: yep - I thnik next commit should be about moving as much as possible to viewModel
     
     //todo: and next after this should be about writting some test cases as our app starts to become slowly quite a complicated state machine
-    
-    //todo: IMPORTANT! for sure we have problem when tapping on screen during the color transition - we can start multiple color transitions at once - check in print logs - best would be to block tapping on screen when in color transition - by this I mean tapping on screen will only show up / prolong showing up the ui - nothing more
 }
