@@ -10,7 +10,6 @@ import RxCocoa
 import RxSwift
 
 class ViewModel {
-    //todo: checkout if all of these needs to be BahaviourRelays - maybe some of them could be just normal variables - if we don't subscribe to them then there's no point for making them relays
     var screenColor = BehaviorRelay<UIColor>(value: UIColor.random)
     var mode = BehaviorRelay<Mode>(value: .paused) //todo: do we really need it? in this moment nothing subsribes to it
     var playPauseButtonIconName = BehaviorRelay<String>(value: TextsAndNames.ViewModel.playButtonIconName)
