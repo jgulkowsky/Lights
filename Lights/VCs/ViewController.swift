@@ -112,6 +112,4 @@ class ViewController: UIViewController {
     }
     
     //todo: should animations be here? not rather in vm? they are also a part o logic
-    
-    //todo: remember to handle playPauseButton similar like tap anywhere - now it's different in terms of prolonging animations - in fact user can only influence animation when it collapsing
 }

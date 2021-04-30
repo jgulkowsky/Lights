@@ -32,6 +32,8 @@ class ViewModel {
     }
     
     func onPlayPauseButtonTap() {
+        prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility)
+        
         if mode.value == .paused {
             switchToPlayingMode()
         } else {
@@ -82,6 +84,4 @@ class ViewModel {
             })
             .disposed(by: hideUITimerDisposeBag)
     }
-    
-    //todo: prolong viisbility also on playPauseButtonTap - but first do some animations - as it can bahave differently if you did it vice versa
 }
