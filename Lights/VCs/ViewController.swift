@@ -125,6 +125,8 @@ class ViewController: UIViewController {
             self?.playPauseButton.alpha = 0
         }
         uiAnimator.startAnimation()
+        
+        //todo: you can try using runningPropertyAnimatorWithDuration - it's animator but with already started animation - so you don't have to remember about starting the animation - and it happened that you forgot about it and wondering why the hell it's not working xd
     }
     
     private func fadeUIIn() {
