@@ -13,7 +13,7 @@ class ViewModel {
     
     var screenColor = BehaviorRelay<UIColor>(value: UIColor.random)
     var mode = BehaviorRelay<Mode>(value: .paused) //todo: do we really need it? in this moment nothing subsribes to it
-    var playPauseButtonIconName = BehaviorRelay<String>(value: "play")
+    var playPauseButtonIconName = BehaviorRelay<String>(value: TextsAndNames.ViewModel.playButtonIconName)
     var uiVisibility = BehaviorRelay<UIVisibility>(value: .hidden)
     
     private var hideUITimerDisposeBag = DisposeBag()
@@ -48,14 +48,14 @@ class ViewModel {
     private func switchToPlayingMode() {
         //print("switchToPlayingMode")
         mode.accept(.playing)
-        playPauseButtonIconName.accept("pause")
+        playPauseButtonIconName.accept(TextsAndNames.ViewModel.pauseButtonIconName)
         //todo: start color transition
     }
     
     private func switchToPausedMode() {
         //print("switchToPausedMode")
         mode.accept(.paused)
-        playPauseButtonIconName.accept("play")
+        playPauseButtonIconName.accept(TextsAndNames.ViewModel.playButtonIconName)
         //todo: stop color transition
     }
     

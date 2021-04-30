@@ -21,6 +21,7 @@
 		E33F5C41263239850000925C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C40263239850000925C /* Mode.swift */; };
 		E33F5C55263240990000925C /* SizesAndOffsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C54263240990000925C /* SizesAndOffsets.swift */; };
 		E33F5C59263241B20000925C /* IdeasAndTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C58263241B20000925C /* IdeasAndTodos.swift */; };
+		E3958995263BFACB00A01ACD /* TextsAndNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958994263BFACB00A01ACD /* TextsAndNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E33F5C40263239850000925C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		E33F5C54263240990000925C /* SizesAndOffsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizesAndOffsets.swift; sourceTree = "<group>"; };
 		E33F5C58263241B20000925C /* IdeasAndTodos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeasAndTodos.swift; sourceTree = "<group>"; };
+		E3958994263BFACB00A01ACD /* TextsAndNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextsAndNames.swift; sourceTree = "<group>"; };
 		F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 			children = (
 				E33F5C54263240990000925C /* SizesAndOffsets.swift */,
 				E3059274263AC059008EDD28 /* Durations.swift */,
+				E3958994263BFACB00A01ACD /* TextsAndNames.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				E33F5C33263230F30000925C /* DI.swift in Sources */,
 				E33F5C59263241B20000925C /* IdeasAndTodos.swift in Sources */,
 				E33F5C55263240990000925C /* SizesAndOffsets.swift in Sources */,
+				E3958995263BFACB00A01ACD /* TextsAndNames.swift in Sources */,
 				E33F5C26263229970000925C /* ViewModel.swift in Sources */,
 				E33F5BFE263221890000925C /* SceneDelegate.swift in Sources */,
 				E3059275263AC059008EDD28 /* Durations.swift in Sources */,
