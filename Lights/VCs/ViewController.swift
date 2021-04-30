@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     
     private func bindToVMScreenColor() {
         vm.screenColor.asObservable().subscribe { [weak self] color in
-            self?.view.backgroundColor = color
+            self?.view.backgroundColor = color.element
         }.disposed(by: disposeBag)
     }
     
@@ -74,14 +74,14 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMUIVisibility() {
-        vm.uiVisibility.asObservable().subscribe(onNext: { [weak self] uiVisibility in
-            if uiVisibility == .hidden {
+        vm.uiVisibility.asObservable().subscribe{ [weak self] uiVisibility in
+            if uiVisibility.element == .hidden {
                 self?.fadeUIOut()
             } else {
                 self?.fadeUIIn()
             }
             //todo: when add more ui elements, put them into the container and use this binding to control whole container instead of single elements - such as playPauseButton
-        }).disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
     
     private func addTapGestureRecognizer() {
