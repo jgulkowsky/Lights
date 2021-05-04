@@ -120,33 +120,38 @@ class ViewController: UIViewController {
     
     private func fadeUIOut() {
         uiAnimator.stopAnimation(true)
-        let duration = Double(playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange
-        uiAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [weak self] in
-            self?.playPauseButton.alpha = 0
-        }
-        uiAnimator.startAnimation()
-        
-        //todo: you can try using runningPropertyAnimatorWithDuration - it's animator but with already started animation - so you don't have to remember about starting the animation - and it happened that you forgot about it and wondering why the hell it's not working xd
+        uiAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: Double(playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange,
+            delay: .zero,
+            options: .curveEaseInOut,
+            animations: { [weak self] in
+                self?.playPauseButton.alpha = 0
+            })
     }
     
     private func fadeUIIn() {
         uiAnimator.stopAnimation(true)
-        let duration = Double(1.0 - playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange
-        uiAnimator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut) { [weak self] in
-            self?.playPauseButton.alpha = 1
-        }
-        uiAnimator.startAnimation()
+        uiAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: Double(1.0 - playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange,
+            delay: .zero,
+            options: .curveEaseInOut,
+            animations: { [weak self] in
+                self?.playPauseButton.alpha = 1
+            })
     }
     
     private func startColorTransition(to color: UIColor?) {
         print("startColorTransition")
-        bgColorAnimator = UIViewPropertyAnimator(duration: Durations.ViewModel.colorTransition, curve: .linear) { [weak self] in
-            self?.view.backgroundColor = color
-        }
-        bgColorAnimator.addCompletion { [weak self] _ in
-            self?.vm.onColorTransitionComplete()
-        }
-        bgColorAnimator.startAnimation()
+        bgColorAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: Durations.ViewModel.colorTransition,
+            delay: .zero,
+            options: [.curveLinear, .allowUserInteraction],
+            animations: { [weak self] in
+                self?.view.backgroundColor = color
+            },
+            completion: { [weak self] _ in
+                self?.vm.onColorTransitionComplete()
+            })
     }
     
     //todo: should animations be here? not rather in vm? they are also a part o logic - this applies to both fading out / in of the button and starting / stopping color transition of the view
