@@ -14,12 +14,6 @@ class FadeableButTappableButton: UIView {
     
     private var animator = UIViewPropertyAnimator()
     
-//    private enum State {
-//        case visible, fadingOut, hidden, showingUp
-//    }
-    
-    //private var state = State.visible
-    
     private let disposeBag = DisposeBag()
     
     func setup(withTapHandlerOnButtonFullyOpaque tapHandlerOnButtonFullyOpaque: @escaping () -> (),
@@ -44,7 +38,6 @@ class FadeableButTappableButton: UIView {
     }
     
     func fadeOut() {
-        //todo: we don't use states - and vm
         button.isUserInteractionEnabled = false
         animator.stopAnimation(true)
         animator = UIViewPropertyAnimator.runningPropertyAnimator(
@@ -60,7 +53,6 @@ class FadeableButTappableButton: UIView {
     }
     
     func fadeIn() {
-        //todo: we don't use states - and vm
         self.isUserInteractionEnabled = true
         animator.stopAnimation(true)
         animator = UIViewPropertyAnimator.runningPropertyAnimator(
