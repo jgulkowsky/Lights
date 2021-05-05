@@ -48,9 +48,9 @@ class ViewController: UIViewController {
         }
         
         playPauseButton.setup(withTapHandlerOnButtonFullyOpaque: { [weak self] in
-            self?.vm.onPlayPauseButtonTap()
+            self?.vm.onPlayPauseButtonTapWhenItIsOpaque()
         }, andTapHandlerOnButtonSemiTransparent: { [weak self] in
-            self?.vm.onBackButtonHelperTap()
+            self?.vm.onPlayPauseButtonTapWhenItSemiTransparent()
         })
     }
     

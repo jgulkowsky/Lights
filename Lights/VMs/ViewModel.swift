@@ -38,32 +38,17 @@ class ViewModel {
         }
     }
     
-    //todo: IMPORTANT when playPauseButton is fading out it doesn't react on touches - I wrote about it earlier but didn't notice then that this can be bothering and that it seems as our ui is broken a little bit - I think we sould try to do it in such way that play/pause functionality is available as long as we can see the button (even really really poorly as it's almost zero opacity) - if you do so also check with onScreenTap - as this possibly can cause such situation that when you tap on button you will change mode but in same moment if you tap on screen you will just make button visible again (and not change bg color) - however this is maybe okay? Think about it anyway
-    //todo: IMPORTANT but for sure we need to change this fading out inactivity - this is really annoying especially when button is quite opaque still (let's say it has 90% opacity and seems like normal active button - then it looks as it ust doesn't respond to our action and that ui is broken)
-    //todo: probably you will have to use option userInteractionEnabled = true - and it probably needs to be set up in uiviewpropertyanimator constructor
-    //todo: it's probably not so easy - as there's a problem when we do animation with alpha to 0 - then button is unresponsive event with using userInteractionEnabled (source: https://stackoverflow.com/questions/13499817/does-uibutton-become-disabled-when-its-alpha-is-set-to-0-0)
-    //todo: possible solution: add viewBehind then button with size of this button, view is transparent (or if impossible because of alpha 0 - however for tapGesture maybe it's ok? check out - then it can always be in color of the bg) call it sth like fadingOutButtonHelperView and when it's tapped then make button visible and change it to opposite mode at once
-    //todo: we could also use just one view instead of button and helper - just use view with tapGesture instea of button with tapping auto implemented - of course if tap gesture can work when transparent - and then we will change mode to inactive only if really alpha is zero
-    
-    func onBackButtonHelperTap() {
-        print("onBackButtonHelperTap")
+    func onPlayPauseButtonTapWhenItSemiTransparent() {
+        print("onPlayPauseButtonTapWhenItSemiTransparent")
         showUI(forSeconds: Durations.ViewModel.uiVisibility) //todo: this should be dependent on fadeOut / fadeIn level - if fading in then it should not be called or be ignored
-        if mode.value == .paused {
-            switchToPlayingMode()
-        } else {
-            switchToPausedMode()
-        }
+        updateMode()
     }
     
-    func onPlayPauseButtonTap() {
-        print("onPlayPauseButtonTap")
+    func onPlayPauseButtonTapWhenItIsOpaque() {
+        print("onPlayPauseButtonTapWhenItIsOpaque")
         playPauseButtonTappedAtLeastOnce = true
         prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility) //or show it once again?
-        if mode.value == .paused {
-            switchToPlayingMode()
-        } else {
-            switchToPausedMode()
-        }
+        updateMode()
     }
     
     func onColorTransitionComplete() {
@@ -87,6 +72,14 @@ class ViewModel {
         //print("chooseNewScreenColor")
         let color = color ?? UIColor.random
         screenColor.accept(color)
+    }
+    
+    private func updateMode() {
+        if mode.value == .paused {
+            switchToPlayingMode()
+        } else {
+            switchToPausedMode()
+        }
     }
     
     private func switchToPlayingMode() {
