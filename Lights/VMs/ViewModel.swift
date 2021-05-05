@@ -21,7 +21,7 @@ class ViewModel {
     private var hideUITimerDisposeBag = DisposeBag()
     
     init() {
-        print("ViewModel.init")
+//        print("ViewModel.init")
         showUI(forSeconds: Durations.ViewModel.uiVisibilityInitial)
     }
     
