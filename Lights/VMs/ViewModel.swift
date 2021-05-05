@@ -25,6 +25,7 @@ class ViewModel {
     }
     
     func onScreenTap() {
+        print("onScreenTap")
         if uiVisibility.value == .hidden {
             showUI(forSeconds: Durations.ViewModel.uiVisibility)
         } else {
@@ -43,10 +44,21 @@ class ViewModel {
     //todo: it's probably not so easy - as there's a problem when we do animation with alpha to 0 - then button is unresponsive event with using userInteractionEnabled (source: https://stackoverflow.com/questions/13499817/does-uibutton-become-disabled-when-its-alpha-is-set-to-0-0)
     //todo: possible solution: add viewBehind then button with size of this button, view is transparent (or if impossible because of alpha 0 - however for tapGesture maybe it's ok? check out - then it can always be in color of the bg) call it sth like fadingOutButtonHelperView and when it's tapped then make button visible and change it to opposite mode at once
     //todo: we could also use just one view instead of button and helper - just use view with tapGesture instea of button with tapping auto implemented - of course if tap gesture can work when transparent - and then we will change mode to inactive only if really alpha is zero
+    
+    func onBackButtonHelperTap() {
+        print("onBackButtonHelperTap")
+        showUI(forSeconds: Durations.ViewModel.uiVisibility) //todo: this should be dependent on fadeOut / fadeIn level - if fading in then it should not be called or be ignored
+        if mode.value == .paused {
+            switchToPlayingMode()
+        } else {
+            switchToPausedMode()
+        }
+    }
+    
     func onPlayPauseButtonTap() {
         print("onPlayPauseButtonTap")
         playPauseButtonTappedAtLeastOnce = true
-        prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility)
+        prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility) //or show it once again?
         if mode.value == .paused {
             switchToPlayingMode()
         } else {
@@ -55,14 +67,14 @@ class ViewModel {
     }
     
     func onColorTransitionComplete() {
-        print("onColorTransitionComplete")
+        //print("onColorTransitionComplete")
         if mode.value == .playing {
             chooseNewScreenColor()
         }
     }
     
     func onColorTransitionStopped(at color: UIColor?) {
-        print("onColorTransitionStopped")
+        //print("onColorTransitionStopped")
         guard let color = color else {
             //todo: first of all - it should not happen ever!
             //todo: log error
@@ -72,20 +84,20 @@ class ViewModel {
     }
     
     private func chooseNewScreenColor(_ color: UIColor? = nil) {
-        print("chooseNewScreenColor")
+        //print("chooseNewScreenColor")
         let color = color ?? UIColor.random
         screenColor.accept(color)
     }
     
     private func switchToPlayingMode() {
-        print("switchToPlayingMode")
+        //print("switchToPlayingMode")
         mode.accept(.playing)
         playPauseButtonIconName.accept(TextsAndNames.ViewModel.pauseButtonIconName)
         chooseNewScreenColor()
     }
     
     private func switchToPausedMode() {
-        print("switchToPausedMode")
+        //print("switchToPausedMode")
         mode.accept(.paused)
         playPauseButtonIconName.accept(TextsAndNames.ViewModel.playButtonIconName)
     }
