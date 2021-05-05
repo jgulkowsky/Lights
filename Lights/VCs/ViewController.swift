@@ -97,7 +97,7 @@ class ViewController: UIViewController {
             } else {
                 //todo: first of all - it will not rather happen ever!
                 //todo: log error
-                fatalError("Icon is nil!") //todo: fatalErrors are not the best way out...
+                fatalError("Nil value found in playPauseButtonIconName.element") //todo: fatalErrors are not the best way out...
             }
         }.disposed(by: disposeBag)
     }
