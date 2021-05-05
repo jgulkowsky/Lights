@@ -11,13 +11,13 @@ import RxSwift
 class FadeableButTappableButton: UIView {
     
     private let button = UIButton()
+    private let disposeBag = DisposeBag()
     
     private var animator = UIViewPropertyAnimator()
     
-    private let disposeBag = DisposeBag()
-    
     func setup(withTapHandlerOnButtonFullyOpaque tapHandlerOnButtonFullyOpaque: @escaping () -> (),
                andTapHandlerOnButtonSemiTransparent tapHandlerOnButtonSemiTransparent: @escaping () -> ()) {
+//        print("setup")
         setupButtonConstraints()
         setupButtonTapHandler(tapHandlerOnButtonFullyOpaque)
         setupBackgroundColor()
@@ -25,6 +25,7 @@ class FadeableButTappableButton: UIView {
     }
     
     func setupIcon(withName iconName: String, andConfiguration configuration: UIImage.Configuration?, andColor color: UIColor?) {
+//        print("setupIcon")
         if let icon = UIImage(systemName: iconName, withConfiguration: configuration) {
             let tintedIcon = icon.withRenderingMode(.alwaysTemplate)
             button.setImage(tintedIcon, for: .normal)
@@ -38,6 +39,7 @@ class FadeableButTappableButton: UIView {
     }
     
     func fadeOut() {
+//        print("fadeOut")
         button.isUserInteractionEnabled = false
         animator.stopAnimation(true)
         animator = UIViewPropertyAnimator.runningPropertyAnimator(
@@ -53,6 +55,7 @@ class FadeableButTappableButton: UIView {
     }
     
     func fadeIn() {
+//        print("fadeIn")
         self.isUserInteractionEnabled = true
         animator.stopAnimation(true)
         animator = UIViewPropertyAnimator.runningPropertyAnimator(
@@ -68,6 +71,7 @@ class FadeableButTappableButton: UIView {
     }
     
     private func setupButtonConstraints() {
+//        print("setupButtonConstraints")
         addSubview(button)
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -75,16 +79,19 @@ class FadeableButTappableButton: UIView {
     }
     
     private func setupButtonTapHandler(_ handler: @escaping () -> ()) {
+//        print("setupButtonTapHandler")
         button.rx.tap.bind { _ in
             handler()
         }.disposed(by: disposeBag)
     }
     
     private func setupBackgroundColor() {
+//        print("setupBackgroundColor")
         self.backgroundColor = .clear
     }
     
     private func setupBackgroundTapHandler(_ handler: @escaping () -> ()) {
+//        print("setupBackgroundTapHandler")
         let tapGesture = UITapGestureRecognizer()
         self.addGestureRecognizer(tapGesture)
 
