@@ -14,11 +14,9 @@ class ViewController: UIViewController {
 
     private var vm: ViewModel!
     
+    private let playPauseButton = FadeableButTappableButton()
     private let disposeBag = DisposeBag()
-    private let testTransparentView = UIView()
-    private let playPauseButton = UIButton()
-    
-    private var uiAnimator = UIViewPropertyAnimator()
+
     private var bgColorAnimator = UIViewPropertyAnimator()
     
     init(_ vm: ViewModel) {
@@ -32,33 +30,12 @@ class ViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        setupTestTransparentView()
         setupPlayPauseButton()
         bindToVMScreenColor()
         bindToVMPlayPauseButtonIcon()
         bindToVMUIVisibility()
         bindToVMMode()
         addTapGestureRecognizer()
-    }
-    
-    private func setupTestTransparentView() {
-        view.addSubview(testTransparentView)
-        testTransparentView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(SizesAndOffsets.ViewController.PlayPauseButton.bottomInset)
-            make.height.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.height)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.width)
-        }
-        testTransparentView.backgroundColor = .clear
-        
-        let tapGesture = UITapGestureRecognizer()
-        testTransparentView.addGestureRecognizer(tapGesture)
-
-        tapGesture.rx.event.bind(onNext: { [weak self] _ in
-            self?.vm.onBackButtonHelperTap()
-        }).disposed(by: disposeBag)
-        
-        //but this should also be inactive when button is completely transparent
     }
     
     private func setupPlayPauseButton() {
@@ -70,9 +47,11 @@ class ViewController: UIViewController {
             make.width.equalTo(SizesAndOffsets.ViewController.PlayPauseButton.width)
         }
         
-        playPauseButton.rx.tap.bind { [weak self] _ in
+        playPauseButton.setup(withTapHandlerOnButtonFullyOpaque: { [weak self] in
             self?.vm.onPlayPauseButtonTap()
-        }.disposed(by: disposeBag)
+        }, andTapHandlerOnButtonSemiTransparent: { [weak self] in
+            self?.vm.onBackButtonHelperTap()
+        })
     }
     
     private func bindToVMScreenColor() {
@@ -88,12 +67,10 @@ class ViewController: UIViewController {
     
     private func bindToVMPlayPauseButtonIcon() {
         vm.playPauseButtonIconName.asObservable().subscribe { [weak self] playPauseButtonIconName in
-            if let iconName = playPauseButtonIconName.element,
-               let icon = UIImage(systemName: iconName, withConfiguration: SizesAndOffsets.ViewController.PlayPauseButton.iconSizeConfig) {
-                let tintedIcon = icon.withRenderingMode(.alwaysTemplate)
-                self?.playPauseButton.setImage(tintedIcon, for: .normal)
-                self?.playPauseButton.setImage(tintedIcon, for: .highlighted)
-                self?.playPauseButton.tintColor = .white //todo: in future make it lighter than background
+            if let iconName = playPauseButtonIconName.element {
+                self?.playPauseButton.setupIcon(withName: iconName,
+                                                andConfiguration: SizesAndOffsets.ViewController.PlayPauseButton.iconSizeConfig,
+                                                andColor: .white) //todo: in future make it lighter than background
             } else {
                 //todo: first of all - it will not rather happen ever!
                 //todo: log error
@@ -141,33 +118,11 @@ class ViewController: UIViewController {
     }
     
     private func fadeUIOut() {
-        playPauseButton.isUserInteractionEnabled = false
-        uiAnimator.stopAnimation(true)
-        uiAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: Double(playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange,
-            delay: .zero,
-            options: .curveEaseInOut,
-            animations: { [weak self] in
-                self?.playPauseButton.alpha = 0
-            },
-            completion: { [weak self] _ in
-                self?.testTransparentView.isUserInteractionEnabled = false
-            })
+        playPauseButton.fadeOut()
     }
     
     private func fadeUIIn() {
-        testTransparentView.isUserInteractionEnabled = true
-        uiAnimator.stopAnimation(true)
-        uiAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: Double(1.0 - playPauseButton.alpha) * Durations.ViewModel.uiVisibilityChange,
-            delay: .zero,
-            options: .curveEaseInOut,
-            animations: { [weak self] in
-                self?.playPauseButton.alpha = 1
-            },
-            completion: { [weak self] _ in
-                self?.playPauseButton.isUserInteractionEnabled = true
-            })
+        playPauseButton.fadeIn()
     }
     
     private func startColorTransition(to color: UIColor?) {
@@ -190,14 +145,4 @@ class ViewController: UIViewController {
     
     //todo: and next after this should be about writting some test cases as our app starts to become slowly quite a complicated state machine
 }
-
-//click on button fully visible -> button tap handler
-//click when button is fading out / fading in -> back button view tap handler
-//click when buttonn is faded out -> nothing handles it
-
-//todo: create FadingButTappableButton class
-//todo: move there funcitons: fadeUIIn / fadeUIOut - but not whole leve it there for more ui elements - just add same bodies into there - call them fadeOut / fadeIn
-//todo: add states
-//todo: add setIcon function - and call it from bindToVMPlayPauseButtonIcon body
-//todo: add handlers from here - 2 one for normal button one for back button helper click
 

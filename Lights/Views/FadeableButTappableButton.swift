@@ -22,17 +22,25 @@ class FadeableButTappableButton: UIView {
     
     private let disposeBag = DisposeBag()
     
-    func setup(withName iconName: String,
-               andConfiguration configuration: UIImage.Configuration?,
-               andColor color: UIColor?,
-               andTapHandlerOnButtonFullyOpaque tapHandlerOnButtonFullyOpaque: @escaping () -> (),
+    func setup(withTapHandlerOnButtonFullyOpaque tapHandlerOnButtonFullyOpaque: @escaping () -> (),
                andTapHandlerOnButtonSemiTransparent tapHandlerOnButtonSemiTransparent: @escaping () -> ()) {
         setupButtonConstraints()
-        setupButtonIcon(iconName, configuration, color)
         setupButtonTapHandler(tapHandlerOnButtonFullyOpaque)
-        
         setupBackgroundColor()
         setupBackgroundTapHandler(tapHandlerOnButtonSemiTransparent)
+    }
+    
+    func setupIcon(withName iconName: String, andConfiguration configuration: UIImage.Configuration?, andColor color: UIColor?) {
+        if let icon = UIImage(systemName: iconName, withConfiguration: configuration) {
+            let tintedIcon = icon.withRenderingMode(.alwaysTemplate)
+            button.setImage(tintedIcon, for: .normal)
+            button.setImage(tintedIcon, for: .highlighted)
+            button.tintColor = color
+        } else {
+            //todo: first of all - it will not rather happen ever!
+            //todo: log error
+            fatalError("Cannot create icon with iconName: \(iconName) and configuration: \(String(describing: configuration)) and color: \(String(describing: color))") //todo: fatalErrors are not the best way out...
+        }
     }
     
     func fadeOut() {
@@ -78,19 +86,6 @@ class FadeableButTappableButton: UIView {
         button.rx.tap.bind { _ in
             handler()
         }.disposed(by: disposeBag)
-    }
-    
-    private func setupButtonIcon(_ iconName: String, _ configuration: UIImage.Configuration?, _ color: UIColor?) {
-        if let icon = UIImage(systemName: iconName, withConfiguration: configuration) {
-            let tintedIcon = icon.withRenderingMode(.alwaysTemplate)
-            button.setImage(tintedIcon, for: .normal)
-            button.setImage(tintedIcon, for: .highlighted)
-            button.tintColor = color
-        } else {
-            //todo: first of all - it will not rather happen ever!
-            //todo: log error
-            fatalError("Cannot create icon with iconName: \(iconName) and configuration: \(String(describing: configuration)) and color: \(String(describing: color))") //todo: fatalErrors are not the best way out...
-        }
     }
     
     private func setupBackgroundColor() {
