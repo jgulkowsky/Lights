@@ -9,9 +9,9 @@ import Foundation
 
 struct Debug {
     struct Log {
-        static let ViewController = "ViewController"
-        static let ViewModel = "ViewModel"
-        static let FadeableButTappableButton = "FadeableButTappableButton"
+        static let viewController = "ViewController"
+        static let viewModel = "ViewModel"
+        static let fadeableButTappableButton = "FadeableButTappableButton"
     }
     struct Error {
         

@@ -17,7 +17,7 @@ class FadeableButTappableButton: UIView {
     
     func setup(withTapHandlerOnButtonFullyOpaque tapHandlerOnButtonFullyOpaque: @escaping () -> (),
                andTapHandlerOnButtonSemiTransparent tapHandlerOnButtonSemiTransparent: @escaping () -> ()) {
-//        print("\(Debug.Log.FadeableButTappableButton).setup")
+//        print("\(Debug.Log.fadeableButTappableButton).setup")
         setupButtonConstraints()
         setupButtonTapHandler(tapHandlerOnButtonFullyOpaque)
         setupBackgroundColor()
@@ -25,7 +25,7 @@ class FadeableButTappableButton: UIView {
     }
     
     func setupIcon(withName iconName: String, andConfiguration configuration: UIImage.Configuration?, andColor color: UIColor?) {
-//        print("\(Debug.Log.FadeableButTappableButton).setupIcon")
+//        print("\(Debug.Log.fadeableButTappableButton).setupIcon")
         if let icon = UIImage(systemName: iconName, withConfiguration: configuration) {
             let tintedIcon = icon.withRenderingMode(.alwaysTemplate)
             button.setImage(tintedIcon, for: .normal)
@@ -39,7 +39,7 @@ class FadeableButTappableButton: UIView {
     }
     
     func fadeOut() {
-//        print("\(Debug.Log.FadeableButTappableButton).fadeOut")
+//        print("\(Debug.Log.fadeableButTappableButton).fadeOut")
         button.isUserInteractionEnabled = false
         animator.stopAnimation(true)
         animator = UIViewPropertyAnimator.runningPropertyAnimator(
@@ -55,7 +55,7 @@ class FadeableButTappableButton: UIView {
     }
     
     func fadeIn() {
-//        print("\(Debug.Log.FadeableButTappableButton).fadeIn")
+//        print("\(Debug.Log.fadeableButTappableButton).fadeIn")
         self.isUserInteractionEnabled = true
         animator.stopAnimation(true)
         animator = UIViewPropertyAnimator.runningPropertyAnimator(
@@ -71,7 +71,7 @@ class FadeableButTappableButton: UIView {
     }
     
     private func setupButtonConstraints() {
-//        print("\(Debug.Log.FadeableButTappableButton).setupButtonConstraints")
+//        print("\(Debug.Log.fadeableButTappableButton).setupButtonConstraints")
         addSubview(button)
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -79,19 +79,19 @@ class FadeableButTappableButton: UIView {
     }
     
     private func setupButtonTapHandler(_ handler: @escaping () -> ()) {
-//        print("\(Debug.Log.FadeableButTappableButton).setupButtonTapHandler")
+//        print("\(Debug.Log.fadeableButTappableButton).setupButtonTapHandler")
         button.rx.tap.bind { _ in
             handler()
         }.disposed(by: disposeBag)
     }
     
     private func setupBackgroundColor() {
-//        print("\(Debug.Log.FadeableButTappableButton).setupBackgroundColor")
+//        print("\(Debug.Log.fadeableButTappableButton).setupBackgroundColor")
         self.backgroundColor = .clear
     }
     
     private func setupBackgroundTapHandler(_ handler: @escaping () -> ()) {
-//        print("\(Debug.Log.FadeableButTappableButton).setupBackgroundTapHandler")
+//        print("\(Debug.Log.fadeableButTappableButton).setupBackgroundTapHandler")
         let tapGesture = UITapGestureRecognizer()
         self.addGestureRecognizer(tapGesture)
 

@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     private var bgColorAnimator = UIViewPropertyAnimator()
     
     init(_ vm: ViewModel) {
-//        print("\(Debug.Log.ViewController).init")
+//        print("\(Debug.Log.viewController).init")
         self.vm = vm
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     }
     
     override func loadView() {
-//        print("\(Debug.Log.ViewController).loadView")
+//        print("\(Debug.Log.viewController).loadView")
         super.loadView()
         setupPlayPauseButton()
         bindToVMScreenColor()
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
     
     private func setupPlayPauseButton() {
-//        print("\(Debug.Log.ViewController).setupPlayPauseButton")
+//        print("\(Debug.Log.viewController).setupPlayPauseButton")
         view.addSubview(playPauseButton)
         playPauseButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(SizesAndOffsets.ViewController.PlayPauseButton.bottomInset)
@@ -58,9 +58,9 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMScreenColor() {
-//        print("\(Debug.Log.ViewController).bindToVMScreenColor")
+//        print("\(Debug.Log.viewController).bindToVMScreenColor")
         vm.screenColor.asObservable().subscribe { [weak self] color in
-//            print("\(Debug.Log.ViewController).bindToVMScreenColor.subscribe")
+//            print("\(Debug.Log.viewController).bindToVMScreenColor.subscribe")
             if (self?.vm.mode.value == .paused) {
                 self?.view.backgroundColor = color.element
             } else {
@@ -70,9 +70,9 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMPlayPauseButtonIcon() {
-//        print("\(Debug.Log.ViewController).bindToVMPlayPauseButtonIcon")
+//        print("\(Debug.Log.viewController).bindToVMPlayPauseButtonIcon")
         vm.playPauseButtonIconName.asObservable().subscribe { [weak self] playPauseButtonIconName in
-//            print("\(Debug.Log.ViewController).bindToVMPlayPauseButtonIcon.subscribe")
+//            print("\(Debug.Log.viewController).bindToVMPlayPauseButtonIcon.subscribe")
             if let iconName = playPauseButtonIconName.element {
                 self?.playPauseButton.setupIcon(withName: iconName,
                                                 andConfiguration: SizesAndOffsets.ViewController.PlayPauseButton.iconSizeConfig,
@@ -86,9 +86,9 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMUIVisibility() {
-//        print("\(Debug.Log.ViewController).bindToVMUIVisibility")
+//        print("\(Debug.Log.viewController).bindToVMUIVisibility")
         vm.uiVisibility.asObservable().subscribe { [weak self] uiVisibility in
-//            print("\(Debug.Log.ViewController).bindToVMUIVisibility.subscribe")
+//            print("\(Debug.Log.viewController).bindToVMUIVisibility.subscribe")
             if uiVisibility.element == .hidden {
                 self?.fadeUIOut()
             } else {
@@ -99,11 +99,11 @@ class ViewController: UIViewController {
     }
     
     private func bindToVMMode() {
-//        print("\(Debug.Log.ViewController).bindToVMMode")
+//        print("\(Debug.Log.viewController).bindToVMMode")
         vm.mode.asObservable()
             .filter { $0 == .paused }
             .subscribe { [weak self] mode in
-//                print("\(Debug.Log.ViewController).bindToVMMode.subscribe")
+//                print("\(Debug.Log.viewController).bindToVMMode.subscribe")
                 guard let `self` = self else {
                     //todo: first of all - it will not rather happen ever!
                     //todo: log error
@@ -118,7 +118,7 @@ class ViewController: UIViewController {
     }
     
     private func addTapGestureRecognizer() {
-//        print("\(Debug.Log.ViewController).addTapGestureRecognizer")
+//        print("\(Debug.Log.viewController).addTapGestureRecognizer")
         let tapGesture = UITapGestureRecognizer()
         view.addGestureRecognizer(tapGesture)
 
@@ -128,17 +128,17 @@ class ViewController: UIViewController {
     }
     
     private func fadeUIOut() {
-//        print("\(Debug.Log.ViewController).fadeUIOut")
+//        print("\(Debug.Log.viewController).fadeUIOut")
         playPauseButton.fadeOut()
     }
     
     private func fadeUIIn() {
-//        print("\(Debug.Log.ViewController).fadeUIIn")
+//        print("\(Debug.Log.viewController).fadeUIIn")
         playPauseButton.fadeIn()
     }
     
     private func startColorTransition(to color: UIColor?) {
-//        print("\(Debug.Log.ViewController).startColorTransition")
+//        print("\(Debug.Log.viewController).startColorTransition")
         bgColorAnimator = UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: Durations.ViewModel.colorTransition,
             delay: .zero,

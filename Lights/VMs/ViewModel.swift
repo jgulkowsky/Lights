@@ -21,12 +21,12 @@ class ViewModel {
     private var hideUITimerDisposeBag = DisposeBag()
     
     init() {
-//        print("\(Debug.Log.ViewModel).init")
+//        print("\(Debug.Log.viewModel).init")
         showUI(forSeconds: Durations.ViewModel.uiVisibilityInitial)
     }
     
     func onScreenTap() {
-//        print("\(Debug.Log.ViewModel).onScreenTap")
+//        print("\(Debug.Log.viewModel).onScreenTap")
         if uiVisibility.value == .hidden {
             showUI(forSeconds: Durations.ViewModel.uiVisibility)
         } else {
@@ -40,27 +40,27 @@ class ViewModel {
     }
     
     func onPlayPauseButtonTapWhenItSemiTransparent() {
-//        print("\(Debug.Log.ViewModel).onPlayPauseButtonTapWhenItSemiTransparent")
+//        print("\(Debug.Log.viewModel).onPlayPauseButtonTapWhenItSemiTransparent")
         showUI(forSeconds: Durations.ViewModel.uiVisibility) //todo: this should be dependent on fadeOut / fadeIn level - if fading in then it should not be called or be ignored - this could be accomplished with using FadeableButTappableButtonViewModel - while it has states then maybe here it will be called but then FadeableButTappableButtonViewModel will know what to do with it
         updateMode()
     }
     
     func onPlayPauseButtonTapWhenItIsOpaque() {
-//        print("\(Debug.Log.ViewModel).onPlayPauseButtonTapWhenItIsOpaque")
+//        print("\(Debug.Log.viewModel).onPlayPauseButtonTapWhenItIsOpaque")
         playPauseButtonTappedAtLeastOnce = true
         prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility)
         updateMode()
     }
     
     func onColorTransitionComplete() {
-//        print("\(Debug.Log.ViewModel).onColorTransitionComplete")
+//        print("\(Debug.Log.viewModel).onColorTransitionComplete")
         if mode.value == .playing {
             chooseNewScreenColor()
         }
     }
     
     func onColorTransitionStopped(at color: UIColor?) {
-//        print("\(Debug.Log.ViewModel).onColorTransitionStopped")
+//        print("\(Debug.Log.viewModel).onColorTransitionStopped")
         guard let color = color else {
             //todo: first of all - it should not happen ever!
             //todo: log error
@@ -70,13 +70,13 @@ class ViewModel {
     }
     
     private func chooseNewScreenColor(_ color: UIColor? = nil) {
-//        print("\(Debug.Log.ViewModel).chooseNewScreenColor")
+//        print("\(Debug.Log.viewModel).chooseNewScreenColor")
         let color = color ?? UIColor.random
         screenColor.accept(color)
     }
     
     private func updateMode() {
-//        print("\(Debug.Log.ViewModel).updateMode")
+//        print("\(Debug.Log.viewModel).updateMode")
         if mode.value == .paused {
             switchToPlayingMode()
         } else {
@@ -85,20 +85,20 @@ class ViewModel {
     }
     
     private func switchToPlayingMode() {
-//        print("\(Debug.Log.ViewModel).switchToPlayingMode")
+//        print("\(Debug.Log.viewModel).switchToPlayingMode")
         mode.accept(.playing)
         playPauseButtonIconName.accept(TextsAndNames.ViewModel.pauseButtonIconName)
         chooseNewScreenColor()
     }
     
     private func switchToPausedMode() {
-//        print("\(Debug.Log.ViewModel).switchToPausedMode")
+//        print("\(Debug.Log.viewModel).switchToPausedMode")
         mode.accept(.paused)
         playPauseButtonIconName.accept(TextsAndNames.ViewModel.playButtonIconName)
     }
     
     private func showUI(forSeconds seconds: Int) {
-//        print("\(Debug.Log.ViewModel).showUI")
+//        print("\(Debug.Log.viewModel).showUI")
         if uiVisibility.value == .hidden {
             uiVisibility.accept(.visible)
             resetHideUITimer(forSeconds: seconds)
@@ -106,14 +106,14 @@ class ViewModel {
     }
     
     private func prolongShowingUI(forSeconds seconds: Int) {
-//        print("\(Debug.Log.ViewModel).prolongShowingUI")
+//        print("\(Debug.Log.viewModel).prolongShowingUI")
         if uiVisibility.value == .visible {
             resetHideUITimer(forSeconds: seconds)
         }
     }
     
     private func resetHideUITimer(forSeconds seconds: Int) {
-//        print("\(Debug.Log.ViewModel).resetHideUITimer")
+//        print("\(Debug.Log.viewModel).resetHideUITimer")
         hideUITimerDisposeBag = DisposeBag()
         Observable.just(())
             .delay(.seconds(seconds), scheduler: MainScheduler.instance)
