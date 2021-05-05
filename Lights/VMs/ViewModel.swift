@@ -21,11 +21,12 @@ class ViewModel {
     private var hideUITimerDisposeBag = DisposeBag()
     
     init() {
+        print("ViewModel.init")
         showUI(forSeconds: Durations.ViewModel.uiVisibilityInitial)
     }
     
     func onScreenTap() {
-        print("onScreenTap")
+//        print("ViewModel.onScreenTap")
         if uiVisibility.value == .hidden {
             showUI(forSeconds: Durations.ViewModel.uiVisibility)
         } else {
@@ -39,27 +40,27 @@ class ViewModel {
     }
     
     func onPlayPauseButtonTapWhenItSemiTransparent() {
-        print("onPlayPauseButtonTapWhenItSemiTransparent")
-        showUI(forSeconds: Durations.ViewModel.uiVisibility) //todo: this should be dependent on fadeOut / fadeIn level - if fading in then it should not be called or be ignored
+//        print("ViewModel.onPlayPauseButtonTapWhenItSemiTransparent")
+        showUI(forSeconds: Durations.ViewModel.uiVisibility) //todo: this should be dependent on fadeOut / fadeIn level - if fading in then it should not be called or be ignored - this could be accomplished with using FadeableButTappableButtonViewModel - while it has states then maybe here it will be called but then FadeableButTappableButtonViewModel will know what to do with it
         updateMode()
     }
     
     func onPlayPauseButtonTapWhenItIsOpaque() {
-        print("onPlayPauseButtonTapWhenItIsOpaque")
+//        print("ViewModel.onPlayPauseButtonTapWhenItIsOpaque")
         playPauseButtonTappedAtLeastOnce = true
-        prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility) //or show it once again?
+        prolongShowingUI(forSeconds: Durations.ViewModel.uiVisibility)
         updateMode()
     }
     
     func onColorTransitionComplete() {
-        //print("onColorTransitionComplete")
+//        print("ViewModel.onColorTransitionComplete")
         if mode.value == .playing {
             chooseNewScreenColor()
         }
     }
     
     func onColorTransitionStopped(at color: UIColor?) {
-        //print("onColorTransitionStopped")
+//        print("ViewModel.onColorTransitionStopped")
         guard let color = color else {
             //todo: first of all - it should not happen ever!
             //todo: log error
@@ -69,12 +70,13 @@ class ViewModel {
     }
     
     private func chooseNewScreenColor(_ color: UIColor? = nil) {
-        //print("chooseNewScreenColor")
+//        print("ViewModel.chooseNewScreenColor")
         let color = color ?? UIColor.random
         screenColor.accept(color)
     }
     
     private func updateMode() {
+//        print("ViewModel.updateMode")
         if mode.value == .paused {
             switchToPlayingMode()
         } else {
@@ -83,40 +85,40 @@ class ViewModel {
     }
     
     private func switchToPlayingMode() {
-        //print("switchToPlayingMode")
+//        print("ViewModel.switchToPlayingMode")
         mode.accept(.playing)
         playPauseButtonIconName.accept(TextsAndNames.ViewModel.pauseButtonIconName)
         chooseNewScreenColor()
     }
     
     private func switchToPausedMode() {
-        //print("switchToPausedMode")
+//        print("ViewModel.switchToPausedMode")
         mode.accept(.paused)
         playPauseButtonIconName.accept(TextsAndNames.ViewModel.playButtonIconName)
     }
     
     private func showUI(forSeconds seconds: Int) {
+//        print("ViewModel.showUI")
         if uiVisibility.value == .hidden {
-            //print("make ui visible")
             uiVisibility.accept(.visible)
             resetHideUITimer(forSeconds: seconds)
         }
     }
     
     private func prolongShowingUI(forSeconds seconds: Int) {
+//        print("ViewModel.prolongShowingUI")
         if uiVisibility.value == .visible {
-            //print("prolong showing ui")
             resetHideUITimer(forSeconds: seconds)
         }
     }
     
     private func resetHideUITimer(forSeconds seconds: Int) {
+//        print("ViewModel.resetHideUITimer")
         hideUITimerDisposeBag = DisposeBag()
         Observable.just(())
             .delay(.seconds(seconds), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.uiVisibility.accept(.hidden)
-                //print("make ui hidden")
             })
             .disposed(by: hideUITimerDisposeBag)
     }
