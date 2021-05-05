@@ -22,6 +22,7 @@
 		E33F5C55263240990000925C /* SizesAndOffsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C54263240990000925C /* SizesAndOffsets.swift */; };
 		E33F5C59263241B20000925C /* IdeasAndTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F5C58263241B20000925C /* IdeasAndTodos.swift */; };
 		E3958995263BFACB00A01ACD /* TextsAndNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958994263BFACB00A01ACD /* TextsAndNames.swift */; };
+		E3C89D8826433C4300DE532E /* FadeableButTappableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C89D8726433C4300DE532E /* FadeableButTappableButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		E33F5C54263240990000925C /* SizesAndOffsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizesAndOffsets.swift; sourceTree = "<group>"; };
 		E33F5C58263241B20000925C /* IdeasAndTodos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeasAndTodos.swift; sourceTree = "<group>"; };
 		E3958994263BFACB00A01ACD /* TextsAndNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextsAndNames.swift; sourceTree = "<group>"; };
+		E3C89D8726433C4300DE532E /* FadeableButTappableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeableButTappableButton.swift; sourceTree = "<group>"; };
 		F53400CDAF35851DB12C1CC7 /* Pods_Lights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 				E33F5C37263231FA0000925C /* Extensions */,
 				E33F5C36263231E90000925C /* VMs */,
 				E33F5C35263231E10000925C /* VCs */,
+				E3C89D8626433C1F00DE532E /* Views */,
 				E33F5BFB263221890000925C /* AppDelegate.swift */,
 				E33F5BFD263221890000925C /* SceneDelegate.swift */,
 				E33F5C042632218B0000925C /* Assets.xcassets */,
@@ -153,6 +156,14 @@
 				E3958994263BFACB00A01ACD /* TextsAndNames.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		E3C89D8626433C1F00DE532E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3C89D8726433C4300DE532E /* FadeableButTappableButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +284,7 @@
 				E33F5C33263230F30000925C /* DI.swift in Sources */,
 				E33F5C59263241B20000925C /* IdeasAndTodos.swift in Sources */,
 				E33F5C55263240990000925C /* SizesAndOffsets.swift in Sources */,
+				E3C89D8826433C4300DE532E /* FadeableButTappableButton.swift in Sources */,
 				E3958995263BFACB00A01ACD /* TextsAndNames.swift in Sources */,
 				E33F5C26263229970000925C /* ViewModel.swift in Sources */,
 				E33F5BFE263221890000925C /* SceneDelegate.swift in Sources */,
