@@ -34,7 +34,10 @@ class FadeableButTappableButton: UIView {
         } else {
             //todo: first of all - it will not rather happen ever!
             //todo: log error
-            fatalError("Cannot create icon with iconName: \(iconName) and configuration: \(String(describing: configuration)) and color: \(String(describing: color))") //todo: fatalErrors are not the best way out...
+            fatalError(Debug.Error.FadeableButTappableButton.cannotCreateIcon(
+                        with: iconName,
+                        configuration: String(describing: configuration),
+                        andColor: String(describing: color)))//todo: fatalErrors are not the best way out...
         }
     }
     

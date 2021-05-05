@@ -64,7 +64,7 @@ class ViewModel {
         guard let color = color else {
             //todo: first of all - it should not happen ever!
             //todo: log error
-            fatalError("Color is nil!") //todo: fatalErrors are not the best way out...
+            fatalError(Debug.Error.ViewModel.colorIsNil) //todo: fatalErrors are not the best way out...
         }
         chooseNewScreenColor(color)
     }

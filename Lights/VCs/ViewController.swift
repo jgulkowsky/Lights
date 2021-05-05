@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Debug.Error.ViewController.requiredInit)
     }
     
     override func loadView() {
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
             } else {
                 //todo: first of all - it will not rather happen ever!
                 //todo: log error
-                fatalError("Nil value found in playPauseButtonIconName.element") //todo: fatalErrors are not the best way out...
+                fatalError(Debug.Error.ViewController.playPauseButtonIconNameElementNil) //todo: fatalErrors are not the best way out...
             }
         }.disposed(by: disposeBag)
     }
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
                 guard let `self` = self else {
                     //todo: first of all - it will not rather happen ever!
                     //todo: log error
-                    fatalError("self is nil!") //todo: fatalErrors are not the best way out...
+                    fatalError(Debug.Error.ViewController.selfIsNil) //todo: fatalErrors are not the best way out...
                 }
                 
                 if self.vm.playPauseButtonTappedAtLeastOnce {
